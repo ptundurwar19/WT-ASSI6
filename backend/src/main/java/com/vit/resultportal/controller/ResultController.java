@@ -2,7 +2,8 @@ package com.vit.resultportal.controller;
 
 import com.vit.resultportal.model.StudentResult;
 import com.vit.resultportal.repository.StudentResultRepository;
-import org.springframework.http.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +32,11 @@ public class ResultController {
     }
 
     @PostMapping
-    public ResponseEntity<StudentResult> saveResult(@RequestBody StudentResult result) {
+    public ResponseEntity<?> saveResult(@RequestBody StudentResult result) {
+        if (result.getId() == null && repository.existsByUsername(result.getUsername())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body("A result already exists for username '" + result.getUsername() + "'. Please edit the existing result or use a different username.");
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(result));
     }
 

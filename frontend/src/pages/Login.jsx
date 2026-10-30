@@ -23,7 +23,7 @@ export default function Login({ onLogin }) {
       <div className="auth-card">
         <div className="brand">VIT</div>
         <h1>Semester Result Portal</h1>
-        <p className="muted">Sign in to view your academic result.</p>
+        <p className="muted">Sign in to view your academic semester result.</p>
 
         <form onSubmit={submit}>
           <label>Username</label>
@@ -48,10 +48,12 @@ export default function Login({ onLogin }) {
         </form>
 
         <p className="center">
-          New student? <Link to="/register">Create account</Link>
+          New student? <Link to="/register">Create student account</Link>
         </p>
-        <div className="demo-box">
-          <b>Demo:</b> student / student123
+
+        <div className="demo-box" style={{ lineHeight: "1.7" }}>
+          <div><b>Admin Demo:</b> <code>admin</code> / <code>admin123</code></div>
+          <div><b>Student Demo:</b> <code>student</code> / <code>student123</code></div>
         </div>
       </div>
     </div>
